@@ -386,10 +386,20 @@ button {
     padding-right: 30px;
 }
 
-.complited-project__icon_point {
-    padding: 0 18px 0 18px;
+.complited-project__icon_points {
+    padding: 0 10px 0 10px;
     align-items: center;
     display: flex;
+}
+
+.icon_point {
+    margin: 0 5px;
+    border: 8px solid white;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+.point-active {
+    opacity: 1;
 }
 
 .complited-project__icon_arr-right {
