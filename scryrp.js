@@ -1,14 +1,26 @@
 let images = [{
     url: "./image/slider/1.jpg",
-    title: "ROSTOV-ON-DON, ADMIRAL"
+    title: "ROSTOV-ON-DON, ADMIRAL",
+    city: "Rostov-on-Don LCD admiral",
+    area: "81 m2",
+    time: "3.5 mounts",
+    cost: "Upon request"
 },
 {
     url: "./image/slider/2.jpg",
-    title: "SOCHI THIEVES"
+    title: "SOCHI THIEVES",
+    city: "Sochi Thieves",
+    area: "105 m2",
+    time: "4 mounts",
+    cost: "Upon request"
 },
 {
     url: "./image/slider/3.jpg",
-    title: "ROSTOV-ON-DON PATRIOTIC"
+    title: "ROSTOV-ON-DON PATRIOTIC",
+    city: "Rostov-on-Don Patriotic",
+    area: "93 m2",
+    time: "3 mounts",
+    cost: "Upon request"
 }];
 
 
@@ -27,6 +39,11 @@ function initSlider(options) {
     let sliderDots = document.querySelector(".complited-project__icon_points");
     let sliderTitleText = document.querySelector(".complited-project__image-text");
 
+    let city = document.querySelector(".city")
+    let area = document.querySelector(".area")
+    let time = document.querySelector(".time")
+    let cost = document.querySelector(".cost")
+    
     initImages();
     initArrows();
 
@@ -87,9 +104,19 @@ function initSlider(options) {
             sliderTitleText.querySelector(".image-title_active").classList.remove("image-title_active");
             sliderTitleText.querySelector(".n" + num).classList.add("image-title_active");
         }
-
+        if (cost) {
+            cost.innerText = images[num].cost
+        }
+        if (city) {
+            city.innerText = images[num].city
+        }
+        if (area) {
+            area.innerText = images[num].area
+        }
+        if (time) {
+            time.innerText = images[num].time
+        }
     }
-
 
     function initTitles() {
         images.forEach((image, index) => {
