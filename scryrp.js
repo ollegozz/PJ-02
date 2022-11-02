@@ -17,17 +17,19 @@ function initSlider() {
     if (!images || !images.length) return
 
     sliderBody = document.querySelector('.complited-project__body')
-    goo = document.querySelector('._go')
+    goo = sliderBody.querySelector('._go')
     arrLeft = sliderBody.querySelector('.complited-project__icon_arr-left')
     arrRight = sliderBody.querySelector('.complited-project__icon_arr-right')
     sliderPoint = sliderBody.querySelector('.complited-project__icon_points')
     sliderImg = sliderBody.querySelector('.complited-project__image-img')
     sliderImgTitle = sliderBody.querySelector('.complited-project__image-text')
+
     let indexImg = 0    
 
     initImages()
     initDots()
     goTitle()
+    // go()
 
     function initImages() {
         images.forEach((index) => {
@@ -67,6 +69,26 @@ function initSlider() {
             })
         })
     }
+
+    // function go() {
+    //     sliderBody.querySelectorAll('._go').forEach(element => {
+    //         element.addEventListener('click', function () {
+    //             indexImg = this.dataset.index
+    //             sliderPoint.querySelectorAll('.point-active').forEach(n => n.classList.remove('point-active'));
+    //             element.classList.add('point-active')                
+    //             initImages()
+    //         })
+    //     })
+    //     sliderBody.querySelectorAll('._go').forEach(element => {
+    //         element.addEventListener('click', function () {
+    //             indexImg = this.dataset.index
+    //             sliderImgTitle.querySelectorAll('.complited-project__image-title_active').forEach(n => n.classList.remove('complited-project__image-title_active'));
+    //             element.classList.add('complited-project__image-title_active')
+    //             console.log(element);
+    //          })
+    //     })
+        
+    // }
 
 
     arrRight.addEventListener('click', function () {
