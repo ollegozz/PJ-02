@@ -366,11 +366,15 @@ button {
     line-height: 19px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
 }
 
-.complited-project__image-title:hover {
-    color: #E3B873;
-    cursor: pointer;
+.complited-project__image-title_active {
+    font-family: 'Yeseva One';
+    font-size: 14px;
+    line-height: 19px;
+    text-transform: uppercase;
+    color: #E3B873;    
     border-bottom: 1px solid #E3B873;
 }
 

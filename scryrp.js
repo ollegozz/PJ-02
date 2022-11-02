@@ -17,15 +17,17 @@ function initSlider() {
     if (!images || !images.length) return
 
     sliderBody = document.querySelector('.complited-project__body')
+    goo = document.querySelector('._go')
     arrLeft = sliderBody.querySelector('.complited-project__icon_arr-left')
     arrRight = sliderBody.querySelector('.complited-project__icon_arr-right')
     sliderPoint = sliderBody.querySelector('.complited-project__icon_points')
     sliderImg = sliderBody.querySelector('.complited-project__image-img')
     sliderImgTitle = sliderBody.querySelector('.complited-project__image-text')
-    let indexImg = 0
- 
+    let indexImg = 0    
+
     initImages()
     initDots()
+    goTitle()
 
     function initImages() {
         images.forEach((index) => {
@@ -37,22 +39,35 @@ function initSlider() {
 
     function initDots() {
         images.forEach((image, index) => {
-            // let dot = `<div class="icon_point" data-index="${index}"></div>`;
-            let dot = `<div class="icon_point n${index === indexImg ? "point-active" : ""}" data-index="${index}"></div>`;            
+            let dot = `<div class="icon_point _go ${index === indexImg ? "point-active" : ""}" data-index="${index}"></div>`;
             sliderPoint.innerHTML += dot;
-        });
+            goDots()
+        })
+    }
+
+    function goDots() {
         sliderPoint.querySelectorAll(".icon_point").forEach(dot => {
             dot.addEventListener("click", function () {
-                indexImg = this.dataset.index                
+                indexImg = this.dataset.index
+                sliderPoint.querySelectorAll('.point-active').forEach(n => n.classList.remove('point-active'));
+                dot.classList.add('point-active')
                 initImages();
             })
         })
-        // function moveSlider(num) {
-        //     sliderPoint.querySelector(".point-active").classList.remove("point-active");
-        //     sliderPoint.querySelector(".n" + num).classList.add("point-active");
-        //     initImages()
-        // }
     }
+
+
+    function goTitle() {
+        sliderImgTitle.querySelectorAll(".complited-project__image-title").forEach(title => {
+            title.addEventListener("click", function () {
+                indexImg = this.dataset.index
+                sliderImgTitle.querySelectorAll('.complited-project__image-title_active').forEach(n => n.classList.remove('complited-project__image-title_active'));
+                title.classList.add('complited-project__image-title_active')
+                initImages();
+            })
+        })
+    }
+
 
     arrRight.addEventListener('click', function () {
         indexImg == images.length - 1 ? indexImg = 0 : indexImg++
