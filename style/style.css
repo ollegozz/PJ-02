@@ -360,7 +360,7 @@ button {
     padding-bottom: 53px;
 }
 
-.complited-project__image-title {
+.image-title {
     font-family: 'Yeseva One';
     font-size: 14px;
     line-height: 19px;
@@ -369,12 +369,12 @@ button {
     cursor: pointer;
 }
 
-.complited-project__image-title_active {
+.image-title_active {
     font-family: 'Yeseva One';
     font-size: 14px;
     line-height: 19px;
     text-transform: uppercase;
-    color: #E3B873;    
+    color: #E3B873;
     border-bottom: 1px solid #E3B873;
 }
 
@@ -388,6 +388,7 @@ button {
 
 .complited-project__icon_arr-left {
     padding-right: 30px;
+    cursor: pointer;
 }
 
 .complited-project__icon_points {
@@ -396,19 +397,61 @@ button {
     display: flex;
 }
 
-.icon_point {
-    margin: 0 5px;
-    border: 8px solid white;
-    border-radius: 50%;
-    opacity: 0.3;
+.complited-project__icon_arr-right {
+    padding-left: 30px;
+    cursor: pointer;
 }
-.point-active {
+
+/* ==================================== */
+.slider__images {
+    position: relative;
+    width: 680px;
+    height: 480px;
+}
+
+.slider__images .image {
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 800ms ease;
+}
+
+.slider__images .image.active {
     opacity: 1;
 }
 
-.complited-project__icon_arr-right {
-    padding-left: 30px;
+.slider__dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 100%;
 }
+
+.slider__dots-item {
+    width: 15px;
+    height: 15px;
+    background: rgb(255, 255, 255);
+    opacity: 0.3;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.4s ease;
+}
+
+.slider__dots-item:hover,
+.slider__dots-item.active {
+    opacity: 1;
+
+}
+
+/* ==================================== */
 
 @media (max-width: 1280px) {
     .complited-project__columns {
@@ -487,19 +530,32 @@ button {
     .complited-project__image-title {
         padding: 0 25px;
     }
+    .image-title {
+        padding: 0 15px;
+    }
 }
 
 @media (max-width: 768px) {
     .complited-project__image-img img {
         max-width: 75%;
     }
-
+    
     .complited-project__image-title {
         padding: 5px 25px 13px 25px;
     }
 
     .complited-project__prop {
         padding: 5px;
+    }
+    .slider__images {
+        position: relative;
+        width: 100%;
+        height: 380px;
+    }
+
+    .image-title {
+        padding: 0 10px;
+        font-size: 12px;
     }
 }
 

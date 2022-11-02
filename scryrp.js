@@ -13,98 +13,112 @@ let images = [{
 
 
 
-function initSlider() {
-    if (!images || !images.length) return
+function initSlider(options) {
+    if (!images || !images.length) return;
 
-    sliderBody = document.querySelector('.complited-project__body')
-    goo = sliderBody.querySelector('._go')
-    arrLeft = sliderBody.querySelector('.complited-project__icon_arr-left')
-    arrRight = sliderBody.querySelector('.complited-project__icon_arr-right')
-    sliderPoint = sliderBody.querySelector('.complited-project__icon_points')
-    sliderImg = sliderBody.querySelector('.complited-project__image-img')
-    sliderImgTitle = sliderBody.querySelector('.complited-project__image-text')
+    options = options || {
+        titles: false,
+        dots: true,
+        autoplay: false
+    };
 
-    let indexImg = 0    
+    let sliderImages = document.querySelector(".slider__images");
+    let sliderArrows = document.querySelector(".slider__arrows");
+    let sliderDots = document.querySelector(".complited-project__icon_points");
+    let sliderTitleText = document.querySelector(".complited-project__image-text");
 
-    initImages()
-    initDots()
-    goTitle()
-    // go()
+    initImages();
+    initArrows();
+
+    if (options.dots) {
+        initDots();
+    }
+
+    if (options.titles) {
+        initTitles();
+    }
+
+    if (options.autoplay) {
+        initAutoplay();
+    }
 
     function initImages() {
-        images.forEach((index) => {
-            index = indexImg
-            let imageDiv = `<img src="${images[index].url}">`
-            sliderImg.innerHTML = imageDiv;
+        images.forEach((image, index) => {
+            let imageDiv = `<div class="image n${index} ${index === 0 ? "active" : ""}" style="background-image:url(${images[index].url});" data-index="${index}"></div>`;
+            sliderImages.innerHTML += imageDiv;
+        });
+    }
+
+    function initArrows() {
+        sliderArrows.querySelectorAll(".slider__arrow").forEach(arrow => {
+            arrow.addEventListener("click", function () {
+                let curNumber = +sliderImages.querySelector(".active").dataset.index;
+                let nextNumber;
+                if (arrow.classList.contains("left")) {
+                    nextNumber = curNumber === 0 ? images.length - 1 : curNumber - 1;
+                } else {
+                    nextNumber = curNumber === images.length - 1 ? 0 : curNumber + 1;
+                }
+                moveSlider(nextNumber);
+            });
         });
     }
 
     function initDots() {
         images.forEach((image, index) => {
-            let dot = `<div class="icon_point _go ${index === indexImg ? "point-active" : ""}" data-index="${index}"></div>`;
-            sliderPoint.innerHTML += dot;
-            goDots()
-        })
-    }
-
-    function goDots() {
-        sliderPoint.querySelectorAll(".icon_point").forEach(dot => {
+            let dot = `<div class="slider__dots-item n${index} ${index === 0 ? "active" : ""}" data-index="${index}"></div>`;
+            sliderDots.innerHTML += dot;
+        });
+        sliderDots.querySelectorAll(".slider__dots-item").forEach(dot => {
             dot.addEventListener("click", function () {
-                indexImg = this.dataset.index
-                sliderPoint.querySelectorAll('.point-active').forEach(n => n.classList.remove('point-active'));
-                dot.classList.add('point-active')
-                initImages();
+                moveSlider(this.dataset.index);
             })
         })
     }
 
+    function moveSlider(num) {
+        sliderImages.querySelector(".active").classList.remove("active");
+        sliderImages.querySelector(".n" + num).classList.add("active");
+        if (options.dots) {
+            sliderDots.querySelector(".active").classList.remove("active");
+            sliderDots.querySelector(".n" + num).classList.add("active");
+        }
+        if (options.titles) {
+            sliderTitleText.querySelector(".image-title_active").classList.remove("image-title_active");
+            sliderTitleText.querySelector(".n" + num).classList.add("image-title_active");
+        }
 
-    function goTitle() {
-        sliderImgTitle.querySelectorAll(".complited-project__image-title").forEach(title => {
+    }
+
+
+    function initTitles() {
+        images.forEach((image, index) => {
+            let titleDiv = `<div class="image-title n${index} ${index === 0 ? "image-title_active" : ""}" data-index="${index}">${images[index].title}</div>`;
+            sliderTitleText.innerHTML += titleDiv;
+        });
+        sliderTitleText.querySelectorAll(".image-title").forEach(title => {
             title.addEventListener("click", function () {
-                indexImg = this.dataset.index
-                sliderImgTitle.querySelectorAll('.complited-project__image-title_active').forEach(n => n.classList.remove('complited-project__image-title_active'));
-                title.classList.add('complited-project__image-title_active')
-                initImages();
+                moveSlider(this.dataset.index);
             })
         })
     }
 
-    // function go() {
-    //     sliderBody.querySelectorAll('._go').forEach(element => {
-    //         element.addEventListener('click', function () {
-    //             indexImg = this.dataset.index
-    //             sliderPoint.querySelectorAll('.point-active').forEach(n => n.classList.remove('point-active'));
-    //             element.classList.add('point-active')                
-    //             initImages()
-    //         })
-    //     })
-    //     sliderBody.querySelectorAll('._go').forEach(element => {
-    //         element.addEventListener('click', function () {
-    //             indexImg = this.dataset.index
-    //             sliderImgTitle.querySelectorAll('.complited-project__image-title_active').forEach(n => n.classList.remove('complited-project__image-title_active'));
-    //             element.classList.add('complited-project__image-title_active')
-    //             console.log(element);
-    //          })
-    //     })
-        
-    // }
-
-
-    arrRight.addEventListener('click', function () {
-        indexImg == images.length - 1 ? indexImg = 0 : indexImg++
-        initImages();
-    })
-
-    arrLeft.addEventListener('click', function () {
-        indexImg == 0 ? indexImg = images.length - 1 : indexImg--
-        initImages();
-
-    })
-
+    function initAutoplay() {
+        setInterval(() => {
+            let curNumber = +sliderImages.querySelector(".active").dataset.index;
+            let nextNumber = curNumber === images.length - 1 ? 0 : curNumber + 1;
+            moveSlider(nextNumber);
+        }, options.autoplayInterval);
+    }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    initSlider();
-});
+let sliderOptions = {
+    dots: true,
+    titles: true,
+    autoplay: true,
+    autoplayInterval: 5000
+};
 
+document.addEventListener("DOMContentLoaded", function () {
+    initSlider(sliderOptions);
+});
