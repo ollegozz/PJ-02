@@ -41,12 +41,12 @@ h6 {
 
 @font-face {
     font-family: 'Nunito Sans';
-    src: url('/font/NunitoSans-Regular.woff') format('woff');
+    src: url('../font/NunitoSans-Regular.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Yeseva One';
-    src: url('/font/YesevaOneRegular.woff') format('woff');
+    src: url('../font/YesevaOneRegular.woff') format('woff');
 }
 
 ._container {
@@ -214,7 +214,7 @@ button {
 /* ========================================= */
 
 .main-block {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/image/fon.jpg);
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/fon.jpg);
     color: white;
 }
 
@@ -986,7 +986,7 @@ button {
 /* -------------------- fantasies ---------------- */
 
 .page__fantasies {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/image/fantasies-fon.png);
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(../image/fantasies-fon.png);
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: 242px;
@@ -1319,7 +1319,7 @@ button {
 /* ------------ map ----------------- */
 
 .page__map {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(/image/map-fon.jpg);
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(../image/map-fon.jpg);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 100% 100%;
